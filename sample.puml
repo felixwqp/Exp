@@ -1,0 +1,28 @@
+
+@startuml
+class StrategyAgent
+
+
+class TokenAgent{
+    TokenActionIdxMap: unordered_map<ActionIdx, TokenPoolIdx>;
+
++    void handle(MessageSentMessageEvent);
++    void handle(ActionUpdateEvent);
+
++    void updateToken(TokenPoolIdx, ActionIdx);
+    
+}
+
+
+StrategyAgent --> TokenAgent: 1. subscribe\n 2.a.  update token  
+/' update token '/
+
+TokenAgent <-left- ActionUpdateAgent: 3
+TokenAgent --> ActionUpdateAgent: 1. subscribe
+TokenAgent -down-> MDPLNotifier: 1. subscribe
+TokenAgent <-- MDPLNotifier: 4.a. MessageSentMessagingEvent
+
+TokenAgent -down-> AdminMessageHandler: 2.b. TokenUpdate\nfpga_magazine_update
+
+TokenAgent -up-> StrategyAgent: 4.b. TokenConsuptionEvent\nTokenExhaustionEvent
+@enduml
