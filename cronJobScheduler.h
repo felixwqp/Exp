@@ -13,6 +13,26 @@
 #include <vector>
 
 
+/*
+ * multimap: move log(N)
+ * priority_queue -> better cache locality, actually it's heap
+ *
+ * std::function: on heap -> dynamic memory
+ *
+ *      1.  When calling a std::function, it does a virtual function call.
+        2. When assigning a lambda with significant captures to a std::function, it will do a dynamic memory allocation!
+
+1. move/copy/temp obj ->
+    calling stack frame,
+    copy into add_evet param,
+    copy to temp struct,
+    store in struct
+
+
+    std::chrono
+ * */
+
+
 
 /*
  *  _STRUCT_TIMEVAL
